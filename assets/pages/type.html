@@ -5,13 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MixIn | Alcoholic / Non-alcoholic</title>
-    <!-- <link rel="stylesheet" href="assets/styles/main.css"> -->
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../styles/search.css">
 </head>
 <body>
-    <form class="search-by-type">
-        <input type="text" class="search-by-type-input">
-    </form>
+    <nav>
+            <ul>
+                <li>
+                    <a href="name.html">
+                        <div>name</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="ingredient.html">
+                        <div>ingredient</div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    <section class="search-section">
+        <h2 class="search-heading">SEARCH BY ALCOHOLIC OR NON</h2>
+        <form class="search search-by-type" data-type="category">
+            <!-- <input type="text" class="search-by search-by-type-input"> -->
+            <select class="search-by search-by-type-input"></select>
+            <input type="submit" value="submit">
+        </form>
+    </section>
+    <section class="search-results">
+        <div class="search-results-contain"></div>
+    </section>
+
+    <section id="modal" class="modal">
+        <div class="modal-contain">
+            <a href="#" class="modal-close">close</a>
+            <div class="modal-content">
+                <h2 class="modal-title"></h2>
+                <img class="modal-img">
+                <p class="modal-instructions"></p>
+                <ul class="modal-ingredients"></ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="../scripts/ui.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../app.js"></script>
 </body>
-<script src="../scripts/ui.js"></script>
-<script src="../app.js"></script>
 </html>

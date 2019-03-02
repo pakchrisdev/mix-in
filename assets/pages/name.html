@@ -5,13 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MixIn | Search By Name</title>
-    <!-- <link rel="stylesheet" href="assets/styles/main.css"> -->
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../styles/search.css">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 </head>
 <body>
-    <form class="search-by-name">
-        <input type="text" class="search-by-name-input">
-    </form>
+    <nav>
+        <ul>
+            <li>
+                <a href="ingredient.html">
+                    <div>ingredients</div>
+                </a>
+            </li>
+            <li>
+                <a href="type.html">
+                    <div>category</div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <section class="search-section">
+        <h2 class="search-heading">SEARCH BY NAME</h2>
+        <form class="search search-by-name" data-type="name">
+            <input type="text" class="search-by search-by-name-input">
+            <input type="submit" value="submit" class="btn">
+        </form>
+    </section>
+    <section class="search-results">
+        <div class="search-results-contain"></div>
+    </section>
+
+    <script src="../scripts/ui.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../app.js"></script>
 </body>
-<script src="../scripts/ui.js"></script>
-<script src="../app.js"></script>
 </html>
