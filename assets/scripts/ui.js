@@ -21,14 +21,16 @@ class UI{
                         <p>${drink.strInstructions}</p>
                     </div>
                     <div class="drink-div-ingredients">
-                    <h4>Ingredients</h4>
+                        <h4>Ingredients</h4>
                         <ul>
                             ${this.displayIngredients(drink)}
                         </ul>
                     </div>
+                    <a href="#" class="btn add-favorites" data-id="${drink.idDrink}">Add to Favorites</a>
                 </div>
             `;
             // console.log(drink)
+            this.isFavorite();
         });
 
     }
@@ -60,9 +62,11 @@ class UI{
                     <h3 class="drink-div-title">${drink.strDrink}</h3>
                     <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}" class="drink-div-img">
                     <a href="#" class="btn get-recipe" data-id="${drink.idDrink}" data-toggle="modal" data-target="#modal">get recipe</a>
+                    <a href="#" class="btn add-favorites" data-id="${drink.idDrink}">Add to Favorites</a>
                 </div>
             `;
         });
+        this.isFavorite();
     }
     displayDrinkRecipe(drink){
         const modal = document.getElementById('modal');
@@ -92,6 +96,33 @@ class UI{
                 opt.value = option.strCategory.split(' ').join('_');
                 searchTag.appendChild(opt);
             });
+        });
+    }
+    displayFavorites(favs){
+        const favContent = document.querySelector('.favorites-content');
+        favs.forEach(fav=>{
+            const divEl = document.createElement('div');
+            divEl.innerHTML = `
+                <h3>${fav.title}</h3>
+                <img src="${fav.img}">
+                <a href="#" class="btn get-recipe" data-id="${fav.id}" data-toggle="modal" data-target="#modal">View</a>
+                <a href="#" class="btn remove-fav" data-id="${fav.id}">Remove</a>
+            `;
+            favContent.appendChild(divEl);
+        });
+    }
+    removeFavorite(fav){
+        fav.remove();
+    }
+    isFavorite(){
+        const drinks = ls.getFromLS();
+        drinks.forEach(drink=>{
+            const id = drink.id;
+            const fav = document.querySelector(`[data-id="${id}"]`);
+            if(fav){
+                fav.classList.add('is-fav');
+                fav.textContent = 'remove from favorites'
+            }
         });
     }
     clearResults(){

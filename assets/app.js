@@ -1,5 +1,6 @@
 const ui = new UI();
 const api = new API();
+const ls = new LS();
 
 
 function eventListeners(){
@@ -60,12 +61,54 @@ function resultsAction(e){
         console.log(e.target.dataset.id)
         api.getSingleRecipe(e.target.dataset.id)
         .then(rec=>{
-            // console.log(rec.drinks.drinks[0])
             ui.displayDrinkRecipe(rec.drinks.drinks[0]);
         });
     }
+    if(e.target.classList.contains('add-favorites')){
+        // console.log('added')
+        if(e.target.classList.contains('favorties-added')){
+            e.target.classList.remove('favorties-added');
+            ls.removeFromLS(e.target.dataset.id);
+            e.target.textContent = 'add to favorites';
+        } else{
+            e.target.classList.add('favorties-added');
+            e.target.textContent = 'remove from favorites';
+            // console.log(e.target.parentElement)
+            const divEl = e.target.parentElement;
+            const drink = {
+                id: e.target.dataset.id,
+                title: divEl.querySelector('.drink-div-title').textContent,
+                img: divEl.querySelector('img').src
+            }
+            // console.log(drink)
+            ls.saveToLS(drink);
+        }
+    }
 }
 function documentReady(){
+    ui.isFavorite();
     const select = document.querySelector('.search-by-type-input');
+    const favContent = document.querySelector('.favorites-content');
+
     if(select) ui.displayOptions();
+    if(favContent){
+        const drinks = ls.getFromLS();
+        ui.displayFavorites(drinks);
+
+        favContent.addEventListener('click', e=>{
+            e.preventDefault();
+            if(e.target.classList.contains('get-recipe')){
+                api.getSingleRecipe(e.target.dataset.id)
+                .then(rec=>{
+                    // console.log(rec.drinks.drinks[0])
+                    ui.displayDrinkRecipe(rec.drinks.drinks[0]);
+                });
+            }
+            if(e.target.classList.contains('remove-fav')){
+                console.log(e.target.parentElement)
+                ui.removeFavorite(e.target.parentElement);
+                ls.removeFromLS(e.target.dataset.id);
+            }
+        });
+    }
 }
