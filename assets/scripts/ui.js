@@ -1,132 +1,136 @@
 class UI{
-    printAlert(mess, cls){
+    errorMessage(message){
+        // console.log('ui message')
         const div = document.createElement('div');
-        div.className = 'alert';
-        div.innerHTML = `<p class="warning">${mess}</p>`;
-        const searchSection = document.querySelector('.search-section');
-        const form = document.querySelector('.search-section form');
-        // const searchHeading = document.querySelector('.search-heading');
-        searchSection.insertBefore(div, form);
-        setTimeout(()=>{document.querySelector('.alert').remove()}, 1500);
+        div.className = 'error-message';
+        div.innerHTML = `<p>${message}</p>`;
+        document.querySelector('.search-result').insertBefore(div, document.querySelector('.search-result .container'));
+        setTimeout(()=>{ document.querySelector('.error-message').remove() }, 1500);
     }
-    displayDrinksWithIngredients(drinks){
-        const resultsContain = document.querySelector('.search-results-contain');
+    clearResults(){
+        const searchResultContainer = document.querySelector('.search-result .container');
+        searchResultContainer.innerHTML = '';
+    }
+    displayWithIngredients(drinks){
+        const searchResultContainer = document.querySelector('.search-result .container');
         drinks.forEach(drink=>{
-            resultsContain.innerHTML += `
-                <div class="drink-div">
-                    <h3 class="drink-div-title">${drink.strDrink}</h3>
-                    <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}" class="drink-div-img">
-                    <div class="drink-div-instructions">
-                        <h4>Instructions</h4>
-                        <p>${drink.strInstructions}</p>
+            // console.log(drink)
+            searchResultContainer.innerHTML += `
+                <div class="search-results_drink-div">
+                    <h3 class="search-results_drink-div_heading">${drink.strDrink}</h3>
+                    <div class="search-results_drink-div_category">
+                        <span class="category">${drink.strCategory}</span>
+                        <span class="alcoholic">${drink.strAlcoholic.toUpperCase()}</span>
                     </div>
-                    <div class="drink-div-ingredients">
-                        <h4>Ingredients</h4>
-                        <ul>
-                            ${this.displayIngredients(drink)}
-                        </ul>
-                    </div>
-                    <a href="#" class="btn add-favorites" data-id="${drink.idDrink}">Add to Favorites</a>
+                    <img src="${drink.strDrinkThumb}" class="search-results_drink-div_image">
+                    <p class="search-results_drink-div_instructions"><strong>Instructions: </strong>${drink.strInstructions}</p>
+                    <p class="search-results_drink-div_ingredients_heading"><strong>Ingredients</strong></p>
+                    <ul class="search-results_drink-div_ingredients">
+                        ${this.listIngredients(drink)}
+                    </ul>
+                    <a href="#" class="btn add-to-favorites" data-id="${drink.idDrink}">
+                        <i class="fas fa-plus-circle"></i>
+                        add to favorites
+                    </a>
                 </div>
             `;
-            // console.log(drink)
-            this.isFavorite();
         });
-
+        this.inFavorites() // label favorites on load
     }
-    displayIngredients(drink){
+    listIngredients(drink){
         // console.log(drink)
-        const ingredients = [];
-        for(let i=1; i<=15; i++){
-            const measure = {};
-            if(drink[`strIngredient${i}`] !== ''){
-                measure.ingredient = drink[`strIngredient${i}`];
-                measure.measure = drink[`strMeasure${i}`];
-                ingredients.push(measure)
+        let ingredients = [];
+        for(let i = 1; i<16; i++){
+            const measurement = {};
+            if(drink[`strIngredient${i}`] !== '' && drink[`strIngredient${i}`] !== null){
+                measurement.ingredient = drink[`strIngredient${i}`];
+                measurement.measure = drink[`strMeasure${i}`];
+                ingredients.push(measurement);
             }
         }
-        let ingredTemp = '';
+        // console.log(ingredients)
+        let template = '';
         ingredients.forEach(ingred=>{
-            ingredTemp += `
-                <li>${ingred.ingredient} &rArr; ${ingred.measure}</li>
-            `;
-        })
-        return ingredTemp;
+            template += `<li>${ingred.ingredient} &mdash; ${ingred.measure}</li>`;
+        });
+        return template;
     }
     displayDrinks(drinks){
-        const resultsContain = document.querySelector('.search-results-contain');
+        // console.log(drinks)
+        const searchResultContainer = document.querySelector('.search-result .container');
         drinks.forEach(drink=>{
-            // console.log(drink)
-            resultsContain.innerHTML += `
-                <div class="drink-div">
-                    <h3 class="drink-div-title">${drink.strDrink}</h3>
-                    <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}" class="drink-div-img">
-                    <a href="#" class="btn get-recipe" data-id="${drink.idDrink}" data-toggle="modal" data-target="#modal">get recipe</a>
-                    <a href="#" class="btn add-favorites" data-id="${drink.idDrink}">Add to Favorites</a>
+            searchResultContainer.innerHTML += `
+                <div class="search-results_drink-div">
+                    <h3 class="search-results_drink-div_heading">${drink.strDrink}</h3>
+                    <img src=${drink.strDrinkThumb} class="search-results_drink-div_image">
+                    <a href="#" class="btn get-recipe" data-id-modal="${drink.idDrink}">get recipe</a>
+                    <a href="#" class="btn add-to-favorites" data-id="${drink.idDrink}">
+                        <i class="fas fa-plus-circle"></i>
+                        add to favorites
+                    </a>
                 </div>
             `;
         });
-        this.isFavorite();
+        this.inFavorites() // label favorites on load
     }
-    displayDrinkRecipe(drink){
-        const modal = document.getElementById('modal');
+    displayDrinkDetails(drink){
+        console.log(drink)
         const modalTitle = document.querySelector('.modal-title');
+        const modalCategoryDivCategory = document.querySelector('.modal-category-div_category');
+        const modalCategoryDivAlcoholic = document.querySelector('.modal-category-div_alcoholic');
         const modalImg = document.querySelector('.modal-img');
         const modalInstructions = document.querySelector('.modal-instructions');
         const modalIngredients = document.querySelector('.modal-ingredients');
+
         modalTitle.textContent = drink.strDrink;
-        modalImg.setAttribute('src',drink.strDrinkThumb);
-        modalInstructions.textContent = drink.strInstructions;
-        modalIngredients.innerHTML = this.displayIngredients(drink);
-        modal.classList.add('modal-visible')
+        modalCategoryDivCategory.textContent = drink.strCategory;
+        modalCategoryDivAlcoholic.textContent = drink.strAlcoholic.toUpperCase();
+        modalImg.setAttribute('src', drink.strDrinkThumb);
+        modalInstructions.innerHTML = `<strong>Instruction: </strong>${drink.strInstructions}`;
+        modalIngredients.innerHTML = this.listIngredients(drink);
     }
-    displayOptions(){
-        const optionsList = api.getOptions()
-        .then(options=>{
-            const list = options.options.drinks;
-            // console.log(list)
+    insertCategories(){
+        const categories = api.getCategories()
+        .then(category=>{
+            console.log(category.drinks)
             const option1 = document.createElement('option');
-            const searchTag = document.querySelector('.search-by-type-input');
-            option1.textContent = 'Make Selection';
+            option1.innerHTML = `&mdash; Select &mdash;`;
             option1.value = '';
-            searchTag.appendChild(option1);
-            list.forEach(option=>{
-                const opt = document.createElement('option');
-                opt.textContent = option.strCategory;
-                opt.value = option.strCategory.split(' ').join('_');
-                searchTag.appendChild(opt);
+            document.querySelector('.search-by-category').appendChild(option1);
+            category.drinks.forEach(cat=>{
+                const option = document.createElement('option');
+                option.textContent = cat.strCategory;
+                option.value = cat.strCategory.split(' ').join('_');
+                document.querySelector('.search-by-category').appendChild(option);
             });
         });
     }
-    displayFavorites(favs){
-        const favContent = document.querySelector('.favorites-content');
-        favs.forEach(fav=>{
-            const divEl = document.createElement('div');
-            divEl.innerHTML = `
-                <h3>${fav.title}</h3>
+    displayFavorites(favorites){
+        const favoritesContainer = document.querySelector('.favorites-container');
+        favorites.forEach(fav=>{
+            const div = document.createElement('div');
+            div.className = 'favorite-div';
+            div.innerHTML = `
+                <h3>${fav.name}</h3>
                 <img src="${fav.img}">
-                <a href="#" class="btn get-recipe" data-id="${fav.id}" data-toggle="modal" data-target="#modal">View</a>
-                <a href="#" class="btn remove-fav" data-id="${fav.id}">Remove</a>
+                <a href="#" class="btn get-recipe" data-id-modal="${fav.id}">get recipe</a>
+                <a href="#" class="btn remove-from-favorites" data-id="${fav.id}"><i class="fas fa-minus-circle"></i> remove from favorites</a>
             `;
-            favContent.appendChild(divEl);
-        });
+            favoritesContainer.appendChild(div);
+        })
     }
-    removeFavorite(fav){
-        fav.remove();
+    removeFromFavorite(drink){
+        drink.remove();
     }
-    isFavorite(){
-        const drinks = ls.getFromLS();
-        drinks.forEach(drink=>{
-            const id = drink.id;
-            const fav = document.querySelector(`[data-id="${id}"]`);
-            if(fav){
-                fav.classList.add('is-fav');
-                fav.textContent = 'remove from favorites'
+    inFavorites(){
+        const favs = ls.getFromLS();
+        favs.forEach(fav=>{
+            const id = fav.id;
+            const favDrink = document.querySelector(`[data-id="${id}"]`);
+            if(favDrink){
+                favDrink.classList.add('added');
+                favDrink.innerHTML = `<i class="fas fa-minus-circle"></i> remove from favorites`;
             }
         });
-    }
-    clearResults(){
-        const resultsDiv = document.querySelector('.search-results-contain');
-        resultsDiv.innerHTML = '';
     }
 }

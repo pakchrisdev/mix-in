@@ -4,44 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="../main.css">
-    <link rel="stylesheet" href="../styles/search.css">
+    <title>MixIn | Favorites</title>
+    <link rel="stylesheet" href="../fa/css/all.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/modal.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li>
-                <a href="name.html">
-                    <div>name</div>
-                </a>
-            </li>
-            <li>
-                <a href="type.html">
-                    <div>category</div>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <section class="favorites">
-        <div class="favorites-content"></div>
+        <nav>
+                <ul>
+                    <li>
+                        <a href="../../index.html">
+                            <div>
+                                <i class="fas fa-home"></i>
+                                home
+                            </div>
+                        </a>
+                    </li>
+                        <li>
+                            <a href="name.html">
+                                <div>
+                                    <i class="fas fa-pen-square"></i>
+                                    name
+                                </div>
+                            </a>
+                        </li>
+                    <li>
+                        <a href="ingredient.html">
+                            <div>
+                                <i class="fas fa-flask"></i>
+                                ingredient
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="category.html">
+                            <div>
+                                <i class="fas fa-th-list"></i>
+                                category
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+    <section class="favorites-section">
+        <h2>favorites</h2>
+        <div class="favorites-container"></div>
     </section>
 
-    <section id="modal" class="modal">
-        <div class="modal-contain">
-            <a href="#" class="modal-close">close</a>
+        <section class="modal">
             <div class="modal-content">
-                <h2 class="modal-title"></h2>
+                <i class="fas fa-times close-modal"></i>
+                <h3 class="modal-title"></h3>
+                <div class="modal-category-div">
+                    <span class="modal-category-div_category"></span>
+                    <span class="modal-category-div_alcoholic"></span>
+                </div>
                 <img class="modal-img">
                 <p class="modal-instructions"></p>
                 <ul class="modal-ingredients"></ul>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <script src="../scripts/ls.js"></script>
+    <script src="../fa/js/all.js"></script>
     <script src="../scripts/ui.js"></script>
     <script src="../scripts/api.js"></script>
-    <script src="../app.js"></script>
+    <script src="../scripts/ls.js"></script>
+    <script src="../scripts/app.js"></script>
 </body>
 </html>

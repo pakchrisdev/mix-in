@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MixIn | Search by Category</title>
+    <link rel="stylesheet" href="../fa/css/all.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/modal.css">
+    <link rel="stylesheet" href="../styles/search.css">
+</head>
+<body>
+        <nav>
+                <ul>
+                    <li>
+                        <a href="../../index.html">
+                            <div>
+                                <i class="fas fa-home"></i>
+                                home
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ingredient.html">
+                            <div>
+                                <i class="fas fa-flask"></i>
+                                ingredient
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="name.html">
+                            <div>
+                                <i class="fas fa-pen-square"></i>
+                                name
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorites.html">
+                            <div>
+                                <i class="fas fa-check"></i>
+                                favorites
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        <section class="search-section">
+            <div class="container">
+                <h2>Look for Drinks by <span>Category</span></h2>
+                <form class="search-form">
+                    <!-- <input type="text" class="search-form_input"> -->
+                    <select class="search-form_input search-by-category" data-search-type="category"></select>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>   
+        </section>
+        
+        <section class="search-result">
+            <div class="container"></div>
+        </section>
+
+        <section class="modal">
+            <div class="modal-content">
+                <i class="fas fa-times close-modal"></i>
+                <h3 class="modal-title"></h3>
+                <div class="modal-category-div">
+                    <span class="modal-category-div_category"></span>
+                    <span class="modal-category-div_alcoholic"></span>
+                </div>
+                <img class="modal-img">
+                <p class="modal-instructions"></p>
+                <ul class="modal-ingredients"></ul>
+            </div>
+        </section>
+    
+    <script src="../fa/js/all.js"></script>
+    <script src="../scripts/ui.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/ls.js"></script>
+    <script src="../scripts/app.js"></script>
+    </body>
+</html>
