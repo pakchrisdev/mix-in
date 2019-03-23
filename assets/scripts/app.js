@@ -61,7 +61,7 @@ function resultsDivAction(e){
             e.target.classList.add('added');
             e.target.innerHTML = `<i class="fas fa-minus-circle"></i> remove from favorites`;
             // console.log(e.target.parentElement.querySelector('[data-id]').dataset.id)
-            const drink = e.target.parentElement;
+            const drink = e.target.parentElement.parentElement;
             const drinkInfo = {
                 id: drink.querySelector('[data-id]').dataset.id,
                 name: drink.querySelector('.search-results_drink-div_heading').textContent,

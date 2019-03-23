@@ -10,6 +10,7 @@ class UI{
     clearResults(){
         const searchResultContainer = document.querySelector('.search-result .container');
         searchResultContainer.innerHTML = '';
+        if(document.querySelector('.search-form_input[type="text"]')) document.querySelector('.search-form_input[type="text"]').value = '';
     }
     displayWithIngredients(drinks){
         const searchResultContainer = document.querySelector('.search-result .container');
@@ -23,15 +24,17 @@ class UI{
                         <span class="alcoholic">${drink.strAlcoholic.toUpperCase()}</span>
                     </div>
                     <img src="${drink.strDrinkThumb}" class="search-results_drink-div_image">
-                    <p class="search-results_drink-div_instructions"><strong>Instructions: </strong>${drink.strInstructions}</p>
+                    <p class="search-results_drink-div_instructions"><strong>Instructions</strong><br>${drink.strInstructions}</p>
                     <p class="search-results_drink-div_ingredients_heading"><strong>Ingredients</strong></p>
                     <ul class="search-results_drink-div_ingredients">
                         ${this.listIngredients(drink)}
                     </ul>
-                    <a href="#" class="btn add-to-favorites" data-id="${drink.idDrink}">
-                        <i class="fas fa-plus-circle"></i>
-                        add to favorites
-                    </a>
+                    <div>
+                        <a href="#" class="btn add-to-favorites" data-id="${drink.idDrink}">
+                            <i class="fas fa-plus-circle"></i>
+                            add to favorites
+                        </a>
+                    </div>
                 </div>
             `;
         });
@@ -64,10 +67,12 @@ class UI{
                     <h3 class="search-results_drink-div_heading">${drink.strDrink}</h3>
                     <img src=${drink.strDrinkThumb} class="search-results_drink-div_image">
                     <a href="#" class="btn get-recipe" data-id-modal="${drink.idDrink}">get recipe</a>
-                    <a href="#" class="btn add-to-favorites" data-id="${drink.idDrink}">
-                        <i class="fas fa-plus-circle"></i>
-                        add to favorites
-                    </a>
+                    <div>
+                        <a href="#" class="btn add-to-favorites" data-id="${drink.idDrink}">
+                            <i class="fas fa-plus-circle"></i>
+                            add to favorites
+                        </a>
+                    </div>
                 </div>
             `;
         });
@@ -114,7 +119,7 @@ class UI{
                 <h3>${fav.name}</h3>
                 <img src="${fav.img}">
                 <a href="#" class="btn get-recipe" data-id-modal="${fav.id}">get recipe</a>
-                <a href="#" class="btn remove-from-favorites" data-id="${fav.id}"><i class="fas fa-minus-circle"></i> remove from favorites</a>
+                <a href="#" class="btn remove-from-favorites" data-id="${fav.id}"><i class="fas fa-minus-circle"></i> remove</a>
             `;
             favoritesContainer.appendChild(div);
         })

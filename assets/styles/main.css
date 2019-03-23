@@ -2,4 +2,42 @@
     margin:0; padding:0;
     box-sizing:border-box;
 }
-body{position:relative;}
+
+:root{
+    --pri-white: rgb(235,235,235);
+}
+
+/*
+font-family: 'Barlow Condensed', sans-serif;
+font-family: 'Barlow', sans-serif;
+font-family: 'Expletus Sans', cursive;
+*/
+
+body{
+    position:relative;
+    font-family: 'Barlow', sans-serif;
+    line-height:1.4;
+}
+
+nav ul{list-style: none;}
+nav a:link, nav a:visited{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+.logo{
+    font-family: 'Expletus Sans', cursive;
+    position:relative;
+    display:inline-block;
+}
+.logo h1{font-weight:500; position:relative; z-index:2;}
+.logo h1 span:nth-child(1){color:black;}
+.logo h1 span:nth-child(2){color:white;}
+.logo-icon{
+    color:rgba(255,255,255,.3);
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-100%) scale(1.75);
+    z-index:1;
+}

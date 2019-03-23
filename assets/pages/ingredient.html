@@ -5,62 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MixIn | Search by Ingredient</title>
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:300,600|Barlow:300,600|Expletus+Sans:500" rel="stylesheet">
     <link rel="stylesheet" href="../fa/css/all.css">
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/modal.css">
     <link rel="stylesheet" href="../styles/search.css">
 </head>
 <body>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="../../index.html">
-                            <div>
-                                <i class="fas fa-pen-square"></i>
-                                home
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="name.html">
-                            <div>
-                                <i class="fas fa-flask"></i>
-                                name
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="category.html">
-                            <div>
-                                <i class="fas fa-th-list"></i>
-                                category
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="favorites.html">
-                            <div>
-                                <i class="fas fa-check"></i>
-                                favorites
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
+    <nav class="search-nav">
+        <ul>
+            <li>
+                <a href="../../index.html">
+                    <div>
+                        <i class="fas fa-pen-square nav-icon"></i>
+                        home
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="name.html">
+                    <div>
+                        <i class="fas fa-flask nav-icon"></i>
+                        name
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="category.html">
+                    <div>
+                        <i class="fas fa-th-list nav-icon"></i>
+                        category
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="favorites.html">
+                    <div>
+                        <i class="fas fa-check nav-icon"></i>
+                        favorites
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
     <section class="search-section">
+                <div class="logo">
+                    <h1>
+                        <span>Mix</span><span>In</span>
+                    </h1>
+                    <i class="fas fa-glass-cheers logo-icon"></i>
+                </div>
         <div class="container">
             <h2>Look for Drinks by <span>Ingredient</span></h2>
             <form class="search-form">
                 <input type="text" class="search-form_input" data-search-type="ingredient">
                 <input type="submit" value="Submit">
             </form>
+
+            <section class="search-result ingredient-result">
+                <div class="container"></div>
+            </section>
         </div>   
     </section>
     
-    <section class="search-result">
-        <div class="container"></div>
-    </section>
 
     <section class="modal">
         <div class="modal-content">

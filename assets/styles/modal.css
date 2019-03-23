@@ -1,14 +1,53 @@
 .modal{
     background:rgba(0,0,0,.85);
-    width:100%; height:100vh;
-    position:fixed;
-    top:0; left:0;
+    width:100%; min-height:100vh;
+    position:fixed; top:0; left:0;
     display:none;
-
+    z-index:1000;
 }
-.modal.active{display:block;}
+.modal.active{
+    /* display:block; */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.close-modal{
+    position:absolute;
+    top:5px; right:5px;
+}
 .modal-content{
     background:white;
+    width:90%; max-height:90vh;
+    position: relative;
+    padding:1rem;
+    overflow-y: scroll;
 }
 
-.close-modal{ cursor:pointer; }
+.modal-category-div{margin:0 0 .5rem 0;}
+.modal-category-div span{
+    padding:.15rem .5rem;
+    border-radius:50px;
+    font-size:.7rem;
+    font-weight:600;
+    color:rgb(235,235,235);
+}
+.modal-category-div_category{background:rgb(13, 99, 13);}
+.modal-category-div_alcoholic{background:rgb(167, 19, 19);}
+
+.modal-img{width:100%; margin:0 0 1rem 0;}
+
+.close-modal{ cursor:pointer; color:rgb(151, 16, 16); font-size:1.5rem;}
+
+.modal-instructions{margin:0 0 1rem 0;}
+.modal-ingredients li{margin:0 0 0 1.2rem;}
+
+@media(min-width:450px){
+    .modal-content{width:375px;}
+    .modal-title{font-size:1.5rem;}
+}
+@media(min-width:700px){
+    .modal-content{width:500px;}
+    .modal-title{font-size:1.8rem; margin:0 0 .5rem 0;}
+    .modal-category-div span{font-size:1rem;}
+    .modal-instructions, .modal-ingredients{font-size:1.25rem;}
+}
